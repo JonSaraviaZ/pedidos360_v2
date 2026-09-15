@@ -3,7 +3,7 @@ import { appConfig } from './app/app.config';
 import { App } from './app/app';
 import { Amplify } from 'aws-amplify';
 
-Amplify.configure({
+Amplify.configure({ // se encarga de todo lo necesario para que se llame cognito
   Auth:{
     Cognito:{
       userPoolId: 'us-east-1_RboQoD7j7',
