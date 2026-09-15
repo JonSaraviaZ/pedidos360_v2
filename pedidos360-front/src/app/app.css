@@ -1,0 +1,143 @@
+/* Fondo general */
+:host {
+  display: block;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #eef5f7, #dfecef);
+  font-family: Arial, Helvetica, sans-serif;
+  color: #29434e;
+}
+
+/* Contenedor principal */
+.container {
+  max-width: 850px;
+  margin: 0 auto;
+  padding: 60px 30px;
+  text-align: center;
+}
+
+/* Título */
+h1 {
+  margin-bottom: 8px;
+  font-size: 2.8rem;
+  font-weight: 600;
+  color: #285b68;
+  letter-spacing: 1px;
+}
+
+/* Subtítulo */
+.container > p {
+  margin-top: 0;
+  color: #6d858d;
+  font-size: 1.1rem;
+}
+
+/* Línea */
+hr {
+  width: 70%;
+  margin: 35px auto;
+  border: none;
+  border-top: 1px solid #c8dadd;
+}
+
+/* Botones */
+button {
+  margin: 8px;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 12px;
+  background-color: #6d9ca6;
+  color: white;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 3px 8px rgba(55, 90, 100, 0.12);
+}
+
+/* Efecto al pasar el mouse */
+button:hover {
+  background-color: #527f89;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(55, 90, 100, 0.18);
+}
+
+/* Efecto al presionar */
+button:active {
+  transform: translateY(0);
+}
+
+/* Sección de usuario autenticado */
+section {
+  margin-top: 45px;
+  padding: 30px;
+  background-color: rgba(255, 255, 255, 0.75);
+  border: 1px solid #d1e0e3;
+  border-radius: 18px;
+  text-align: left;
+  box-shadow: 0 8px 25px rgba(55, 90, 100, 0.08);
+}
+
+/* Título de autenticación */
+section h2 {
+  margin-top: 0;
+  color: #285b68;
+  font-weight: 600;
+}
+
+/* Usuario */
+section p {
+  color: #607980;
+}
+
+/* Subtítulo del token */
+section h3 {
+  margin-top: 25px;
+  color: #47737d;
+  font-weight: 500;
+}
+
+/* Token */
+textarea {
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 8px;
+  padding: 15px;
+  border: 1px solid #c8dadd;
+  border-radius: 12px;
+  background-color: #f5f9fa;
+  color: #48636b;
+  font-family: monospace;
+  font-size: 0.85rem;
+  resize: vertical;
+  outline: none;
+}
+
+/* Cuando se selecciona el textarea */
+textarea:focus {
+  border-color: #6d9ca6;
+  box-shadow: 0 0 0 3px rgba(109, 156, 166, 0.15);
+}
+
+/* Adaptación para pantallas pequeñas */
+@media (max-width: 600px) {
+  .container {
+    padding: 40px 20px;
+  }
+
+  h1 {
+    font-size: 2.2rem;
+  }
+
+  button {
+    width: 100%;
+    margin: 6px 0;
+  }
+
+  hr {
+    width: 100%;
+  }
+
+  section {
+    padding: 20px;
+  }
+}
+
