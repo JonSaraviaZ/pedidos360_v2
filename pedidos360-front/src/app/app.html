@@ -21,28 +21,34 @@
 
       <h3>Access Token</h3>
       <textarea rows="10" cols="80" readonly>{{token}}</textarea>
+
       <hr>
-      <!-- solo aparecerá si el usuario está autenticado -->
-      <button (click) ="consultarPedidos()">Consultar Pedidos</button> 
-
-      @if(cargandoPedidos){
-        <p>Cargando pedidos...</p>
+      <button (click)="consultarPedidos()">
+        Consultar Pedidos
+      </button>
+      @if (cargandoPedidos) {
+        <p>Cargando Pedidos.......</p>
       }
-
       @if(errorPedidos){
-        <p>Error al consultar pedidos: {{errorPedidos}}</p>
+        <p>{{errorPedidos}}</p>
       }
+      @if (pedidos.length > 0) {
+        @for(pedido of pedidos; track pedido.id){
+          <article>
+            <h3>
+              Pedido #{{pedido.id}}
+            </h3>
+            <p><strong>Estado:</strong> {{pedido.estado}}</p>
+            <p><strong>Producto:</strong> {{pedido.producto}}</p>
+            <hr>
+          </article>
+        }
 
-     @if(pedidos.length > 0){
-      @for (pedido of pedidos; track pedido.id){
-        <article>
-          <h3>Pedido #{{pedido.id}}</h3>
-          <p><strong>Estado:</strong> {{pedido.estado}}</p>
-        </article>
       }
-     } 
 
     </section>
+
+
   }
 
 </main>

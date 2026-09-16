@@ -5,7 +5,7 @@ import {
   fetchAuthSession,
   getCurrentUser
 } from 'aws-amplify/auth'
-
+import { PedidosService } from "./pedidos.service";
 @Component({
   selector: 'app-root',
   imports: [],
@@ -13,12 +13,18 @@ import {
   styleUrl: './app.css'
 })
 export class App {
+
+
   usuario = '';
   token = '';
   autenticado = false;
-  pedidos : any[] = [];
+  pedidos: any[] = [];
   cargandoPedidos = false;
   errorPedidos = '';
+
+  constructor(
+    private pedidosService : PedidosService
+  ){}
 
   async login(){
     await signInWithRedirect();
@@ -42,44 +48,28 @@ export class App {
     }
   }
 
-  async consultarPedidos(){
-    this.cargandoPedidos = true;
-    this.errorPedidos = '';
-
-    try{
-      // Lógica para consultar pedidos
-      const session = await fetchAuthSession();
-      const token = session.tokens?.accessToken?.toString()??''; //si la sesión tiene token y access token, se cambia a un string y se guarda en la variable token
-      if(!token){ // !token significa si es nulo.
-        this.errorPedidos = "Debe iniciar sesión para consultar pedidos";
-        return;
+  consultarPedidos() {
+  this.cargandoPedidos = true;
+  this.errorPedidos = '';
+  this.pedidosService
+    .obtenerPedidos()
+    .subscribe({
+      next: (data) => {
+        this.pedidos = data;
+        this.cargandoPedidos = false;
+        console.log(
+          'Pedidos:',
+          data
+        );
+      },
+      error: (error) => {
+        console.error(error);
+        this.errorPedidos =
+          `Error HTTP ${error.status}`;
+        this.cargandoPedidos = false;
       }
-      const response = await fetch('https://owk3iegt6f.execute-api.us-east-1.amazonaws.com/test/api/pedidos',
-        {
-          method: 'GET',
-          headers: {
-            'Authorization': `Bearer ${token}`
-          }
-        }
-      );
-      console.log('Http Status: ', response.status);
+    });
+}
 
-      if(!response.ok){ // response.ok es true si el status es 200-299, false si es otro status
-        this.errorPedidos = `Error HTTP: ${response.status}`;
-        return;
-      }
-      this.pedidos = await response.json();
-      console.log("Pedidos recibidos:", this.pedidos);
 
-    }
-    catch(error){
-      console.error("Error al consultar pedidos:", error);
-      this.errorPedidos = "No fue posible conectar con la API de pedidos."
-
-    }
-    finally{ // Esto se ejecuta siempre, haya habido error o no
-      this.cargandoPedidos = false;
-    }
-
-  }
 }
